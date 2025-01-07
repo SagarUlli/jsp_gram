@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
@@ -23,19 +25,22 @@ public class AppController {
 
 	@GetMapping("/register")
 	public String loadRegister(ModelMap map, User user) {
-		map.put("user", user);
-		return "register.html";
+		return service.loadRegister(map, user);
 	}
 
 	@PostMapping("/register")
 	public String register(@Valid User user, BindingResult result) {
-		if (!user.getPassword().equals(user.getConfirmpassword())) {
-			result.rejectValue("confirmpassword", "error.confirmpassword", "Password Not Matching");
-		}
-		if (result.hasErrors()) {
-			return "register.html";
-		} else {
-			return "redirect:https://www.youtube.com";
-		}
+		return service.register(user, result);
+	}
+
+	@GetMapping("/otp/{id}")
+	public String loadOtpPage(@PathVariable int id, ModelMap map) {
+		map.put("id", id);
+		return "user-otp.html";
+	}
+
+	@PostMapping("/verify-otp")
+	public String verifyOtp(@RequestParam int id, @RequestParam int otp) {
+		return service.verifyOtp(id, otp);
 	}
 }

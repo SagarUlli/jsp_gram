@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
@@ -32,9 +33,12 @@ public class User {
 	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "It should contain atleast 8 charecter, one uppercase, one lowercase, one number and one speacial charecter")
 	private String password;
 	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "It should contain atleast 8 charecter, one uppercase, one lowercase, one number and one speacial charecter")
+	@Transient
 	private String confirmpassword;
 	@NotNull(message = "It is required Field")
 	private String gender;
+	private int otp;
+	private boolean verified;
 
 	public String getFirstname() {
 		return firstname;
@@ -92,6 +96,14 @@ public class User {
 		this.confirmpassword = confirmpassword;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getGender() {
 		return gender;
 	}
@@ -100,12 +112,20 @@ public class User {
 		this.gender = gender;
 	}
 
-	public int getId() {
-		return id;
+	public int getOtp() {
+		return otp;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setOtp(int otp) {
+		this.otp = otp;
+	}
+
+	public boolean isVerified() {
+		return verified;
+	}
+
+	public void setVerified(boolean verified) {
+		this.verified = verified;
 	}
 
 }
