@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edit Post</title>
+<link rel="stylesheet" type="text/css" href="/css/styles.css" />
+</head>
+<body>
+	<h1>Edit Post</h1>
+	<form action="/update-post" method="post" th:object="${post}"
+		enctype="multipart/form-data">
+		<input type="hidden" th:field="*{id}" id="id" name="id" />
+		<div>
+			<label for="image">Image URL:</label> <input type="file"
+				th:field="*{image}" id="image" name="image" />
+		</div>
+		<div>
+			<label for="caption">Caption:</label> <input type="text"
+				th:field="*{caption}" id="caption" name="caption" />
+		</div>
+		<div>
+			<button type="submit">Update Post</button>
+		</div>
+	</form>
+	<a href="/profile" style="text-decoration: none">Back to Posts</a>
+</body>
+</html>

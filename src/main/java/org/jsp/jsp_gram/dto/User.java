@@ -39,6 +39,8 @@ public class User {
 	private String gender;
 	private int otp;
 	private boolean verified;
+	private String bio;
+	private String imageUrl;
 
 	public String getFirstname() {
 		return firstname;
@@ -126,6 +128,22 @@ public class User {
 
 	public void setVerified(boolean verified) {
 		this.verified = verified;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }
