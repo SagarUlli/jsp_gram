@@ -1,4 +1,7 @@
 ---
+
+
+
 JSPGram - Social Media Web Application
 
 JSPGram is a social media platform for users to register, post content, follow others, and manage profiles, with premium membership via Razorpay.
