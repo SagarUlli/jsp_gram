@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.razorpay.RazorpayException;
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -58,8 +60,8 @@ public class AppController {
 	}
 
 	@GetMapping("/home")
-	public String loadHome(HttpSession session) {
-		return service.loadHome(session);
+	public String loadHome(HttpSession session, ModelMap map) {
+		return service.loadHome(session, map);
 	}
 
 	@GetMapping("/logout")
@@ -103,7 +105,67 @@ public class AppController {
 	}
 
 	@PostMapping("/update-post")
-	public String updatePost(Post post, HttpSession session) {
+	public String updatePost(Post post, HttpSession session) throws Exception {
 		return service.updatePost(post, session);
+	}
+
+	@GetMapping("/suggestions")
+	public String suggestions(ModelMap map, HttpSession session) {
+		return service.viewSuggestions(map, session);
+	}
+
+	@GetMapping("/follow/{id}")
+	public String follow(@PathVariable int id, HttpSession session) {
+		return service.followUser(id, session);
+	}
+
+	@GetMapping("/followers")
+	public String getFollowers(HttpSession session, ModelMap map) {
+		return service.getFollowers(session, map);
+	}
+
+	@GetMapping("/following")
+	public String getFollowing(HttpSession session, ModelMap map) {
+		return service.getFollowing(session, map);
+	}
+
+	@GetMapping("/unfollow/{id}")
+	public String unfollow(HttpSession session, @PathVariable int id) {
+		return service.unfollow(session, id);
+	}
+
+	@GetMapping("/view-profile/{id}")
+	public String viewProfile(@PathVariable int id, HttpSession session, ModelMap map) {
+		return service.viewProfile(id, session, map);
+	}
+
+	@GetMapping("/like/{id}")
+	public String likePost(@PathVariable int id, HttpSession session) {
+		return service.likePost(id, session);
+	}
+
+	@GetMapping("/dislike/{id}")
+	public String dislikePost(@PathVariable int id, HttpSession session) {
+		return service.dislikePost(id, session);
+	}
+
+	@GetMapping("/comment/{id}")
+	public String loadCommentPage(HttpSession session, @PathVariable int id, ModelMap map) {
+		return service.loadCommentPage(session, id, map);
+	}
+
+	@PostMapping("/comment/{id}")
+	public String comment(HttpSession session, @PathVariable int id, @RequestParam String comment) {
+		return service.comment(session, id, comment);
+	}
+
+	@GetMapping("/prime")
+	public String prime(HttpSession session, ModelMap map) throws RazorpayException {
+		return service.prime(session, map);
+	}
+
+	@PostMapping("/prime")
+	public String prime(HttpSession session) throws RazorpayException {
+		return service.prime(session);
 	}
 }

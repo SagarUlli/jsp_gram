@@ -1,10 +1,19 @@
 package org.jsp.jsp_gram.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Transient;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
@@ -41,6 +50,27 @@ public class User {
 	private boolean verified;
 	private String bio;
 	private String imageUrl;
+	private boolean prime;
+	@ManyToMany(fetch = FetchType.EAGER)
+	List<User> following = new ArrayList<User>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	List<User> followers = new ArrayList<User>();
+
+	public boolean isFollowing() {
+		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		HttpSession session = attributes.getRequest().getSession();
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			for (User user2 : user.following) {
+				if (this.id == user2.id) {
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
 
 	public String getFirstname() {
 		return firstname;
@@ -144,6 +174,30 @@ public class User {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public boolean isPrime() {
+		return prime;
+	}
+
+	public void setPrime(boolean prime) {
+		this.prime = prime;
+	}
+
+	public List<User> getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(List<User> following) {
+		this.following = following;
+	}
+
+	public List<User> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<User> followers) {
+		this.followers = followers;
 	}
 
 }

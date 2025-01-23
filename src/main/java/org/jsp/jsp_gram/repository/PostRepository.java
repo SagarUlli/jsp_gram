@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface PostRepository extends JpaRepository<Post, Integer> {
 	List<Post> findByUser(User user);
 
+	List<Post> findByUserIn(List<User> users);
 }
