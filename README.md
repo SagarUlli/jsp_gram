@@ -1,38 +1,23 @@
 ---
+JSPGram - Social Media Web Application:
+  description: "JSPGram is a social media platform for users to register, post content, follow others, and manage profiles, with premium membership via Razorpay."
 
+technologies_used:
+  - backend: Spring Boot
+  - frontend: 
+    - Thymeleaf
+    - HTML
+    - CSS
+    - JavaScript
+  - database: MySQL
+  - image_storage: Cloudinary
+  - payment_gateway: Razorpay
 
-
-JSPGram - Social Media Web Application
-
-JSPGram is a social media platform for users to register, post content, follow others, and manage profiles, with premium membership via Razorpay.
-
-Technologies Used
-
-Backend: Spring Boot
-
-Frontend: Thymeleaf, HTML, CSS, JavaScript
-
-Database: MySQL
-
-Image Storage: Cloudinary
-
-Payment Gateway: Razorpay
-
-
-Key Features
-
-User Registration: Email OTP for secure sign-up
-
-Home Feed: Posts from followed users
-
-Profile Management: Upload and manage profile pictures (Cloudinary)
-
-Prime Membership: Premium access via Razorpay
-
-Post Management: Create, edit, delete posts
-
-Followers/Following: Follow users to see their posts
-
-
-
+key_features:
+  - user_registration: "Email OTP for secure sign-up"
+  - home_feed: "Posts from followed users"
+  - profile_management: "Upload and manage profile pictures (Cloudinary)"
+  - prime_membership: "Premium access via Razorpay"
+  - post_management: "Create, edit, delete posts"
+  - followers_following: "Follow users to see their posts"
 ---
